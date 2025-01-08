@@ -26,3 +26,15 @@ export async function createNote(req: Request, res: Response, next: NextFunction
         next(error);
     }
 }
+
+export async function getNote(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+        const noteId: string = req.params.noteId;
+
+        const note = await noteModel.findById(noteId).exec();
+
+        res.status(200).json(note);
+    } catch (error: unknown) {
+        next(error);
+    }
+}
