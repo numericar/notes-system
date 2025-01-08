@@ -1,14 +1,7 @@
-import "dotenv/config";
 import env from "./utils/validateEnv";
+import app from "./app";
 
-import express from "express";
 import mongoose from "mongoose";
-
-const app = express();
-
-app.get("", (req: express.Request, res: express.Response): void => {
-    res.send("Hello World");
-});
 
 mongoose.connect(env.MONGO_CONNECTION_STRING).then((): void => {
     console.log("Database Connected");
