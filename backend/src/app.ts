@@ -1,18 +1,12 @@
-import noteModel from "./models/note";
+import notesRoutes from "./routes/routes";
 
 import express, { NextFunction, Request, Response } from "express";
 
 const app = express();
 
-app.get("", async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    try {
-        const notes = await noteModel.find().exec();
+app.use(express.json());
 
-        res.status(200).json(notes);
-    } catch (error: unknown) {
-        next(error);
-    }
-});
+app.use("/api/notes", notesRoutes);
 
 app.use((req: Request, res: Response, next: NextFunction): void => {
     next(Error("End point not found"));
